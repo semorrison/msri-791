@@ -2,6 +2,7 @@
 \usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
 
 \usepackage{xcolor}
+\usepackage{fp}
 \usepackage{tikz}
 \usetikzlibrary{cd}
 \usetikzlibrary{knots}
@@ -12,6 +13,9 @@
     decorations.pathreplacing,
     decorations.pathmorphing
 }
+
+\tikzset{use Hobby shortcut}
+
 
 \tikzset{string/.style={ultra thick}}
 \tikzset{smallstring/.style={thick,scale=0.75,every node/.style={transform shape}}}
