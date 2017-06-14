@@ -1,0 +1,92 @@
+\usepackage{amsmath,amsfonts,amssymb,amsthm,epsfig}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{cd}
+\usetikzlibrary{knots}
+\usetikzlibrary{calc}
+
+\usetikzlibrary{matrix}
+\usetikzlibrary{arrows,backgrounds,patterns,scopes,external,hobby,
+    decorations.pathreplacing,
+    decorations.pathmorphing
+}
+
+\tikzset{string/.style={ultra thick}}
+\tikzset{smallstring/.style={thick,scale=0.75,every node/.style={transform shape}}}
+\tikzset{
+    triple/.style args={[#1] in [#2] in [#3]}{
+        #1,preaction={preaction={draw,#3},draw,#2}
+    }
+}
+\tikzset{
+    quadruple/.style args={[#1] in [#2] in [#3] in [#4]}{
+        #1,preaction={preaction={preaction={draw,#4},draw,#3}, draw,#2}
+    }
+} 
+\tikzset{
+	super thick/.style={line width=3pt},
+	more thick/.style={line width=1pt},
+}
+
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[final]{microtype}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage[all]{xy}
+
+
+% Theorems
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+%\numberwithin{proposition}{section}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{claim}[proposition]{Claim}
+\newtheorem{conjecture}[proposition]{Conjecture}
+\newtheorem{observation}[proposition]{Observation}
+\newtheorem{warning}[proposition]{Warning}
+
+\theoremstyle{definition}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{exercise}[proposition]{Exercise}
+\newtheorem{question}[proposition]{Question}
+\newtheorem{problem}[proposition]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{example}[proposition]{Example}
+%\newtheorem{hint}[proposition]{Hint}
+\newtheorem{remark}[proposition]{Remark}
+%\newtheorem{apology}[proposition]{Apology}
+%\newtheorem{warning}[proposition]{Warning}
+
+\newcommand{\fdVec}{\mathsf{fdVec}}
+\renewcommand{\Vec}{\mathsf{Vec}}
+\newcommand{\Rep}{\mathsf{Rep}}
+\newcommand{\Mat}{\mathsf{Mat}}
+
+% tricky way to iterate macros over a list
+\def\semicolon{;}
+\def\applytolist#1{
+    \expandafter\def\csname multi#1\endcsname##1{
+        \def\multiack{##1}\ifx\multiack\semicolon
+            \def\next{\relax}
+        \else
+            \csname #1\endcsname{##1}
+            \def\next{\csname multi#1\endcsname}
+        \fi
+        \next}
+    \csname multi#1\endcsname}
+
+% \def\cA{{\cal A}} for A..Z
+\def\calc#1{\expandafter\def\csname c#1\endcsname{{\mathcal #1}}}
+\applytolist{calc}QWERTYUIOPLKJHGFDSAZXCVBNM;
+% \def\bbA{{\mathbb A}} for A..Z
+\def\bbc#1{\expandafter\def\csname bb#1\endcsname{{\mathbb #1}}}
+\applytolist{bbc}QWERTYUIOPLKJHGFDSAZXCVBNM;
+% \def\bfA{{\mathbf A}} for A..Z
+\def\bfc#1{\expandafter\def\csname bf#1\endcsname{{\mathbf #1}}}
+\applytolist{bfc}QWERTYUIOPLKJHGFDSAZXCVBNM;
