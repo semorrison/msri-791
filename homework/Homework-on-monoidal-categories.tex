@@ -6,7 +6,7 @@
 \title{Homework on monoidal categories}
 \maketitle
 
-\begin{exercise}
+\begin{exercise} 
 Show that $\fdVec$ and $\Mat$ are equivalent as categories.
 \end{exercise}
 \begin{proof}[Hint:]
@@ -46,9 +46,6 @@ Conclude that the last surviving Jones-Wenzl idempotent is invertible.  This giv
 Suppose we are a root of unity such that $f^{(n+1)}$ is the first negligible Jones-Wenzl idempotent. Prove that $f^{(k)} \otimes f^{(1)} \cong f^{(k-1)} \oplus f^{(k+1)}$ unless $k=0$ or $k=n$. What happens in those cases? From these observations, give a formula for how $f^{(a)} \otimes f^{(b)}$ breaks up as a direct sum of Jones-Wenzl idempotents.
 \end{proof}
 
-\begin{exercise}
-Show that the golden category, as defined in lecture, is semisimple with two simple objects $1$ and $X$ and in particular that  $X\otimes X \oplus 1 \oplus X$.
-\end{exercise}
 Recall that the golden category has as objects finite subsets of an interval, and the morphisms are planar trivalent graphs modulo the local relations
 \newcommand{\drawI}{ \begin{tikzpicture}[baseline=0cm]
  	\draw (0,.2) .. controls +(30:.3cm) .. (45:.8cm);
@@ -95,6 +92,12 @@ Recall that the golden category has as objects finite subsets of an interval, an
 \loopvertex\;&=0\\
 \drawI \; & = \; \twostrandid \; -  \frac{1}{d}\; \cupcap
 \end{align*}
+where $d=\frac{1+\sqrt{5}}{2}$.
+
+\begin{exercise}
+Show that the golden category, as defined in lecture and above, is semisimple with two simple objects $1$ and $X$ and in particular that  $X\otimes X \oplus 1 \oplus X$.
+\end{exercise}
+
 
 \begin{exercise}
 (Checking every detail here is tedious; use your judgement!)
