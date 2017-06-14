@@ -6,6 +6,8 @@
 \title{Homework on monoidal categories}
 \maketitle
 
+\section{Wednesday}
+
 \begin{exercise} 
 Show that $\fdVec$ and $\Mat$ are equivalent as categories.
 \end{exercise}
@@ -22,7 +24,7 @@ Show that $TL(d=1)$ is monoidally equivalent to $\Rep(\bbZ / 2 \bbZ)$.
 \end{exercise}
 
 \begin{exercise}
-If $\cC$ is a monoidal category, $\cD$ is a category, and we have an equivalence $F:\cC \leftrightarrow \cD:G$, show you can make $D$ into a tensor monoidal in such a way that $F$ and $G$ are a monoidal equivalence.
+If $\cC$ is a monoidal category, $\cD$ is a category, and we have an equivalence $F:\cC \leftrightarrow \cD:G$, show you can make $D$ into a  monoidal category in such a way that $F$ and $G$ are a monoidal equivalence.
 \end{exercise}
 (This is an instance of the idea of `transport of structure`.)
 
@@ -38,13 +40,26 @@ Your answer should involve group cohomology of $G$.
 \end{proof}
 
 \begin{exercise}
+\label{ex:TL-fusion}
 Find the fusion rules for $TL(q+q^{-1})$ at $q$ a root of unity.
-
-Conclude that the last surviving Jones-Wenzl idempotent is invertible.  This gives a 2-object subcategory where all the objects are invertible --- how does it fit into our classification?
 \end{exercise}
 \begin{proof}[Hint:]
 Suppose we are a root of unity such that $f^{(n+1)}$ is the first negligible Jones-Wenzl idempotent. Prove that $f^{(k)} \otimes f^{(1)} \cong f^{(k-1)} \oplus f^{(k+1)}$ unless $k=0$ or $k=n$. What happens in those cases? From these observations, give a formula for how $f^{(a)} \otimes f^{(b)}$ breaks up as a direct sum of Jones-Wenzl idempotents.
 \end{proof}
+
+\begin{exercise}
+(Checking every detail here is tedious; use your judgement!)
+
+Show that every monoidal category $\cC$ is monoidally equivalent to the strict monoidal category $\mathsf{List} \cC$.
+
+Here $\mathsf{List} \cC$ has as objects words in the objects of $\cC$, and $$\mathsf{List} \cC([x_1, x_2, \ldots x_n] \to [y_1, y_2, \ldots y_m]) = \cC(x_1 \otimes (x_2 \otimes \cdots \otimes (x_n \otimes 1)) \to y_1 \otimes (y_2 \otimes \cdots \otimes (y_m \otimes 1))).$$ Part of the exercise is to define the tensor product of morphisms in $\mathsf{List} \cC$. The functors between $\cC$ and $\mathsf{List} \cC$ should send $x$ to $[x]$ and $[x_1, x_2, \ldots x_n]$ to $x_1 \otimes (x_2 \otimes \cdots \otimes (x_n \otimes 1))$. You'll need to specify what the functors do on morphisms, and make them into monoidal functors by specifying tensorators. Finally you'll need to show that these functors form an equivalence; you can do this directly, or show one of the functors is fully faithful and essentially surjective.
+\end{exercise}
+
+\section{Thursday}
+
+\begin{exercise}
+Conclude from Exercise \ref{ex:TL-fusion} that the last surviving Jones-Wenzl idempotent is invertible.  This gives a 2-object subcategory where all the objects are invertible --- how does it fit into our classification?
+\end{exercise}
 
 Recall that the golden category has as objects finite subsets of an interval, and the morphisms are planar trivalent graphs modulo the local relations
 \newcommand{\drawI}{ \begin{tikzpicture}[baseline=0cm]
@@ -96,15 +111,6 @@ where $d=\frac{1+\sqrt{5}}{2}$.
 
 \begin{exercise}
 Show that the golden category, as defined in lecture and above, is semisimple with two simple objects $1$ and $X$ and in particular that  $X\otimes X \oplus 1 \oplus X$.
-\end{exercise}
-
-
-\begin{exercise}
-(Checking every detail here is tedious; use your judgement!)
-
-Show that every monoidal category $\cC$ is monoidally equivalent to the strict monoidal category $\mathsf{List} \cC$.
-
-Here $\mathsf{List} \cC$ has as objects words in the objects of $\cC$, and $$\mathsf{List} \cC([x_1, x_2, \ldots x_n] \to [y_1, y_2, \ldots y_m]) = \cC(x_1 \otimes (x_2 \otimes \cdots \otimes (x_n \otimes 1)) \to y_1 \otimes (y_2 \otimes \cdots \otimes (y_m \otimes 1))).$$ Part of the exercise is to define the tensor product of morphisms in $\mathsf{List} \cC$. The functors between $\cC$ and $\mathsf{List} \cC$ should send $x$ to $[x]$ and $[x_1, x_2, \ldots x_n]$ to $x_1 \otimes (x_2 \otimes \cdots \otimes (x_n \otimes 1))$. You'll need to specify what the functors do on morphisms, and make them into monoidal functors by specifying tensorators. Finally you'll need to show that these functors form an equivalence; you can do this directly, or show one of the functors is fully faithful and essentially surjective.
 \end{exercise}
 
 \end{document}
