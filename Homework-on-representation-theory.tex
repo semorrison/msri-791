@@ -1,0 +1,398 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm,epsfig}
+\usepackage[left=2cm, right=2cm, top=2cm, bottom=2cm]{geometry}
+
+% Theorems
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+%\numberwithin{proposition}{section}
+\newtheorem{lemma}[proposition]{Lemma}
+\newtheorem{corollary}[proposition]{Corollary}
+\newtheorem{claim}[proposition]{Claim}
+\newtheorem{conjecture}[proposition]{Conjecture}
+\newtheorem{observation}[proposition]{Observation}
+\newtheorem{warning}[proposition]{Warning}
+
+\theoremstyle{definition}
+\newtheorem{definition}[proposition]{Definition}
+\newtheorem{exercise}[proposition]{Exercise}
+\newtheorem{question}[proposition]{Question}
+\newtheorem{problem}[proposition]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{example}[proposition]{Example}
+%\newtheorem{hint}[proposition]{Hint}
+\newtheorem{remark}[proposition]{Remark}
+%\newtheorem{apology}[proposition]{Apology}
+%\newtheorem{warning}[proposition]{Warning}
+
+
+\begin{document}
+\title{A Crash Course in Representation Theory}
+\author{Noah Snyder}
+\maketitle
+
+All vector spaces are over the complex numbers. Representation theory in finite characteristic is harder!
+
+\section{Definitions and fundamental notions}
+
+\begin{definition}
+Let $G$ be a group.  A representation of $G$ is a linear action of $G$ on a vector space $V$.  Such an action can be described in two equivalent ways:
+\begin{itemize}
+\item A map of groups $\rho_V: G \rightarrow \mathrm{GL}(V)$.
+\item An operation $G \times V \rightarrow V$ denoted by multiplication, such that 
+\begin{align*}
+g(v+w) &= gv+gw \\
+g(cv) &= c gv\\
+e(v) &= v \\
+g(hv) &=(gh)v
+\end{align*}
+ for any $g, h \in G$, any $v,w \in V$, and any $c \in \mathbb{C}$.
+\end{itemize}
+\end{definition}
+
+I will freely go between these two ways of thinking about a representation, but usually I'll use the second notation and drop the $\rho_V$.
+
+\begin{definition}
+A map of representations $\varphi: V \rightarrow W$ is a linear map such that for any $g \in G$, we have:
+$$\varphi(gv) = g \varphi(v).$$
+As usual an isomorphism $\varphi: V \rightarrow W$ is a map of representations that has an inverse map of representations $\psi:W \rightarrow V$.
+We denote the collection of all maps of representations $\mathrm{Hom}_G(V,W)$.
+\end{definition}
+
+Note that in the above definition the action on the left-hand side is the action on $V$, while on the right-hand side it's the action on $W$.  In other words, $\varphi(\rho_V(g)v) = \rho_W(g)\varphi(v)$.
+
+\begin{definition}
+A subrepresentation $W \subset V$ is a linear subspace $W$ of $V$ which is preserved by $G$ in the sense that for every $g \in G$ and $w \in W$ we have $gw \in W$.
+
+If $W \subset V$ is a subrepresentation, then the quotient representation $V/W$ is the quotient vector space with the action $g(vW) = g(v)W$.
+\end{definition}
+
+\begin{definition}
+If $V$ and $W$ are representations of $G$, then we can define the following new representations:
+\begin{itemize}
+\item The trivial representation $\mathbf{1}$ where the vector space is $\mathbb{C}$ and every element of $G$ acts by the identity.
+\item The direct sum $V \oplus W$ where $g \in G$ acts by $g(v,w) = (gv,gw)$.
+\item The tensor product $V \otimes W$ where $g \in G$ acts on pure tensors by $g(v \otimes w) = g v \otimes g w$ and extending by linearity to other vectors.
+\item The dual representation $V^* = \mathrm{Hom}(V,\mathbb{C})$ where $g \in G$ sends $\varphi$ to the function $v \mapsto \varphi(g^{-1}v)$.
+\item The linear Hom representation $\mathrm{Hom}(V,W)$ where $g \in G$ sends $\varphi$ to the function $v \mapsto g \varphi(g^{-1} v)$.
+\end{itemize}
+\end{definition}
+
+\begin{exercise}
+Check that $V^*$ as defined above is a representation.  Would the formula $v \mapsto \varphi(gv)$ also define a representation?
+\end{exercise}
+
+\begin{definition}
+If $V$ is a representation of $G$ then let the invariant subspace $V^G$ be  
+$$\{v \in V: \text{for all $g \in G$ we have } g v = v\}.$$
+\end{definition}
+
+\begin{exercise}
+Show that if $V$ is a finite dimensional representation of $G$, then $V^G$ is isomorphic to a direct sum of trivial representations.
+\end{exercise}
+
+\begin{exercise}
+Show that if $V$ is a finite dimensional representation of $G$ then there's an isomorphism of representations $V \cong V^{**}$.
+\end{exercise}
+
+\begin{exercise}
+If $U$, $V$, and $W$ are representations of $G$, then there's an isomorphism of representations
+$$(U \otimes V) \otimes W \cong U \otimes (V \otimes W).$$
+\end{exercise}
+
+\begin{exercise}
+If $V$ and $W$ are finite dimensional representations of $G$, then there's an isomorphism of representations
+$$W \otimes V^* \cong \mathrm{Hom}(V,W).$$
+\end{exercise}
+
+\begin{exercise}
+Show that the vector space $\mathrm{Hom}_G(V,W)$ is isomorphic to the underlying vector space of $\mathrm{Hom}(V,W)^G$. 
+\end{exercise}
+
+\begin{definition}  We define:
+\begin{itemize}
+\item a non-zero representation $V$ is called \emph{irreducible} if it has no proper nontrivial subrepresentations.
+\item a representation $V$ is called \emph{completely reducible} if it is a direct sum of irreducible representations.
+\item a non-zero representation $V$ is called \emph{indecomposable} if it cannot be written as $V = X \oplus Y$ for two non-zero proper subrepresentations $X, Y$.
+\end{itemize}
+\end{definition}
+
+\begin{warning}
+Note that irreducible representations are completely reducible.  Even the representation $0$ is completely reducible because it is a direct sum of zero irreducible representations.
+\end{warning}
+
+\begin{exercise}
+Any $1$-dimensional representation is irreducible.
+\end{exercise}
+
+\begin{exercise}
+If $W$ is completely reducible, then
+$$ W \cong \bigoplus_{V} V \otimes \mathrm{Hom}_G(V, W) \cong \bigoplus_{V} V^{\oplus \dim \mathrm{Hom}_G(V, W)} $$
+where $V$ ranges over all irreducible representations.
+(You might also observe that the first isomorphism is natural in $W$.)
+\end{exercise}
+
+\section{Representation theory of some nice groups}
+
+\begin{exercise}
+Classify all finite dimensional irreducible representations of $\mathbb{Z}$.
+\end{exercise}
+\begin{proof}[Hint:]
+Look at the eigenvectors of $\rho_V(1)$.
+\end{proof}
+
+\begin{exercise}
+Classify all finite dimensional indecomposable representations of $\mathbb{Z}$.
+\end{exercise}
+\begin{proof}[Hint:]
+Look at the Jordan decomposition of $\rho_V(1)$.
+\end{proof}
+
+\begin{exercise}
+Show that not every finite dimensional representation of $\mathbb{Z}$ is completely reducible.
+\end{exercise}
+
+\begin{exercise}
+Classify all finite dimensional representations of $\mathbb{Z}/n \mathbb{Z}$, and show that they're completely reducible.
+\end{exercise}
+\begin{proof}[Hint:]
+$\rho_V(1)^n = \rho_V(n) = \rho_V(0) = 1$.
+\end{proof}
+
+\begin{definition}
+The sign representation of the symmetric group $S_n$ is the $1$-dimensional vector space with the action $\sigma v = \mathrm{sgn}(\sigma) v$ where $\mathrm{sgn}(\sigma)$ is the sign of the permutation $\sigma$.
+
+The permutation representation of the symmetric group $S_n$ is the $n$-dimensional vector space with basis $e_i$, where $\sigma(e_i) = e_{\sigma i}$.
+\end{definition}
+
+\begin{exercise}
+Show that the permutation representation of $S_n$ has a trivial subrepresentation.
+\end{exercise}
+
+\begin{definition}
+The standard representation of $S_n$ is the permutation representation quotiented by its trivial subrepresentation.
+\end{definition}
+
+\begin{exercise}
+Show that the trivial representation, the sign representation, and the standard representation of $S_3$ are irreducible.
+\end{exercise}
+
+\begin{exercise}
+Show that any finite dimensional representation of the symmetric group $S_3$ is a direct sum of trivial representations, sign representations, and standard representations.
+\end{exercise}
+\begin{proof}[Hint:]
+Break up $V$ into its eigenspaces for the action of $(123)$.  Figure out how $(12)$ acts on these eigenspaces using that $(123)(12) = (12)(123)^2$.  Specifically, show that the $1$-eigenspace breaks up as a sum of trivial and sign representations, while the other two eigenspaces break up as a sum of standard representations.
+\end{proof}
+
+\begin{exercise}
+Classify all finite dimensional representations of the dihedral group $D_{2n}$ and show that they're completely reducible.
+\end{exercise}
+\begin{proof}[Hint:]
+$D_{2n}$ is generated by a rotation $r$ and a reflection $s$ satisfying $s r = r^{-1} s$.  Follow the above outline, first decomposing into eigenspaces for $r$ and then figuring out how $s$ acts on these eigenspaces.
+\end{proof}
+
+\section{Complete reducibility}
+
+\begin{exercise}[Schur's Lemma]
+If $V$ and $W$ are irreducible representations and $\varphi: V \rightarrow W$ is a map of representations, then either $\varphi$ is the zero map or $\varphi$ is an isomorphism.
+
+If $V$ is irreducible then $\mathrm{End}(V) = \mathbb{C} \mathrm{Id}$. 
+\end{exercise}
+
+\begin{definition}
+A unitary representation is a Hilbert space $V$ together with an action of $G$ on $V$ by unitary operators.  A representation is called unitarizable if there exists some inner product on $V$ making the representation unitary.
+\end{definition}
+
+\begin{exercise}
+Any representation of $\mathbb{Z}/n\mathbb{Z}$ is unitarizable.  Some representations of $\mathbb{Z}$ are not unitarizable.
+\end{exercise}
+
+\begin{exercise}
+If $V$ is a unitary representation of $G$ and $W$ is a subrepresentation of $V$, show that the orthogonal complement $W^\perp$ is also a subrepresentation of $V$.
+\end{exercise}
+
+\begin{exercise}
+Any finite dimensional unitary representation is completely reducible.
+\end{exercise}
+
+\begin{exercise}
+Any finite dimensional representation of a finite group is unitarizable.
+\end{exercise}
+\begin{proof}[Hint:]
+Take any inner product $\langle-,-\rangle$ and define a new inner product by $$\frac{1}{\# G} \sum_{g \in G} \langle gv, gw\rangle.$$  Show that $G$ acts by unitary operators with respect to this new inner product.
+\end{proof}
+
+\begin{exercise}
+Any finite dimensional representation of a finite group is completely reducible.
+\end{exercise}
+
+
+\section{Character Theory}
+
+\begin{exercise}
+Suppose that $G$ is a finite group and $V$ a representation of $G$, then $V^G$ is the image of the projection
+$$\frac{1}{\# G}\sum_{g \in G} \rho_V(g).$$
+\end{exercise}
+
+\begin{exercise} \label{Invariant-Trace}
+Suppose that $G$ is a finite group and $V$ a representation of $G$, then
+$$\dim V^G = \frac{1}{\# G} \sum_{g \in G} \mathrm{Tr} \rho_V(g).$$
+\end{exercise}
+
+\begin{definition}
+Suppose that $V$ is a $G$-representation, then we define $$\chi_V(g) = \mathrm{Tr}(\rho_V(g)).$$
+\end{definition}
+
+\begin{definition}
+A function $f: G \rightarrow \mathbb{C}$ is called a class function if $f(gxg^{-1}) = f(x)$ for all $g, x \in G$.
+\end{definition}
+
+\begin{exercise}
+The dimension of the space of class functions is the number of conjugacy classes of $G$.
+\end{exercise}
+
+\begin{exercise}
+$\chi_V$ is a class function.
+\end{exercise}
+
+\begin{exercise}
+$\chi_V(1) = \dim V.$
+\end{exercise}
+
+\begin{exercise}
+$\chi_{\mathbf{1}}(g) = 1.$
+\end{exercise}
+
+\begin{exercise}
+$\chi_{V \oplus W}(g) = \chi_V(g) + \chi_W(g)$
+\end{exercise}
+
+\begin{exercise} \label{tensor-character}
+$\chi_{V \otimes W}(g) = \chi_V(g)  \chi_W(g)$.
+\end{exercise}
+
+\begin{exercise}
+$\chi_{V^*}(g) = \chi_V(g^{-1})$.
+\end{exercise}
+
+\begin{exercise} \label{dual-character}
+If $G$ is a finite group, then $\chi_{V^*}(g) = \overline{\chi_V(g)}$.
+\end{exercise}
+
+
+\begin{exercise}
+Suppose that $G$ is a finite group and $V$ a representation of $G$, then
+$$\dim \mathrm{Hom}_G(V,W) = \frac{1}{\# G} \sum_{g \in G} \chi_V(g) \overline{\chi_W(g)}.$$
+\end{exercise}
+\begin{proof}[Hint:]
+Recall $$\mathrm{Hom}_G(V,W) \cong \mathrm{Hom}(V,W)^G \cong (W \otimes V^*)^G.$$  Now calculate this using Exercises \ref{Invariant-Trace}, \ref{tensor-character}, and \ref{dual-character}.
+\end{proof}
+
+\begin{definition}
+We define an inner product on class functions by
+$$\langle \varphi, \psi \rangle = \frac{1}{\# G} \sum_{g \in G} \varphi(g) \overline{\psi(g)}.$$
+\end{definition}
+
+\begin{exercise}
+The characters $\chi_V$ for $V$ irreducible are orthonormal.
+\end{exercise}
+
+\begin{definition}
+The group ring $\mathbb{C}[G]$ is formal linear combinations $\sum_{g \in G} a_g e_g$ for $a_g \in \mathbb{C}$ with multiplication defined $e_g e_h = e_{gh}$ extended linearly.  The regular representation is $\mathbb{C}[G]$ as a vector space with the action given by $g e_h = e_{gh}$.
+\end{definition}
+
+\begin{exercise}
+The regular representation breaks up as a direct sum over all irreducible representations
+$$\mathbb{C}[G] \cong \bigoplus_V V^{\oplus \dim V}.$$
+\end{exercise}
+\begin{proof}[Hint:]
+Calculate the character of the regular representation, and compute its inner product with each irreducible representation.
+\end{proof}
+
+\begin{exercise}
+As a ring, the group ring is isomorphic to a sum of matrix rings:
+$$\mathbb{C}[G] \cong \bigoplus_V M_{\dim V}(\mathbb{C}).$$
+\end{exercise}
+\begin{proof}[Hint:]
+Compute the ring $\mathrm{End}_G(\mathbb{C}[G], \mathbb{C}[G])$ in two ways.
+\end{proof}
+
+\begin{exercise}
+The number of conjugacy classes is equal to the number of irreducible representations.
+\end{exercise}
+\begin{proof}[Hint:]
+Compute the dimension of the center of $\mathbb{C}[G]$ in two ways.
+\end{proof}
+
+\begin{exercise}
+The characters $\chi_V$ for $V$ irreducible form an orthonormal basis for the space of class functions.
+\end{exercise}
+
+\begin{definition}
+The character table of $G$ is a square matrix whose columns are index by the conjugacy classes $[g]$, whose rows are indexed by the irreducible representations, and whose entries are the numbers $\chi_V(g)$.  The rows of the character table are orthonormal if you weight each entry by $\#[g]/\#G$.
+\end{definition}
+
+\begin{exercise}[Column Orthogonality]
+The columns of the character table are orthogonal with respect to the usual dot product.  Each column dotted with itself is $\#G/\#[g]$.
+\end{exercise}
+\begin{proof}[Hint:]
+Row orthogonality says that $M D M^\dagger = \mathrm{Id}$ where $M$ is the character table and $D$ is a certain diagonal matrix.  Column orthogonality says $M^\dagger M = D^{-1}$.
+\end{proof}
+
+\begin{exercise}
+The $1$-dimensional representations are indexed by the dual group of the abelianization of $G$, that is by 
+$$\mathrm{Hom}(G/[G,G],\mathbb{C}).$$
+\end{exercise}
+
+\begin{exercise}
+Compute the character table of $S_3$.
+\end{exercise}
+\begin{proof}[Hint:]
+Find the $1$-dimensional representations and then use column orthogonality.
+\end{proof}
+
+\begin{exercise}
+Compute the character table of each of the non-abelian groups of order $8$.
+\end{exercise}
+
+\section{Fusion graphs}
+
+\begin{exercise}[Frobenius Reciprocity]
+If $X$, $Y$, $Z$ are representations, then
+$$\mathrm{Hom}_G(X, Y \otimes Z) \cong \mathrm{Hom}_G(X \otimes Z^*, Y).$$
+\end{exercise}
+\begin{proof}[Hint:]
+This can either be proved directly by constructing an explicit map, or by calculating characters.
+\end{proof}
+
+
+\begin{definition}
+If $G$ is a group and $V$ a self-dual representation, then we define the fusion graph of $V$ to be the graph whose vertices are the irreducible representations of $G$ and where vertices $Y$ and $Z$ are connected by $\dim \mathrm{Hom}(Y,Z\otimes V)$ edges.  (This gives a well-defined undirected graph because of Frobenius reciprocity.)
+\end{definition}
+
+\begin{exercise}
+Compute the fusion graph for the standard $2$-dimensional representation of $S_3$.
+\end{exercise}
+
+\begin{exercise}
+Compute the fusion graph for the defining $2$-dimensional representation of $D_{2n}$.
+\end{exercise}
+\begin{proof}[Hint:]
+One approach is to use your earlier classification of representations of $D_{2n}$.  Another approach is to inductively compute the character table and fusion graph by repeatedly tensoring with the defining $2$-dimensional representation (you will need to also know about the $1$-dimensional representations).
+\end{proof}
+
+\begin{exercise}
+Compute the character table of the $12$-element group $T$ of rotational symmetries of the tetrahedron.
+\end{exercise}
+
+\begin{exercise}
+There is a double cover $\mathrm{SU}(2) \rightarrow \mathrm{SO}(3)$.  Let $\tilde{T}$ be the `binary tetrahedral group', which is the $24$ element group consisting of all the elements of $\mathrm{SU}(2)$ which lie above elements of the group $T$ from the previous exercise.  The group $\tilde{T}$ has a  defining $2$-dimensional representation of $\tilde{T}$ coming from the defining action of $SU(2)$ on $\mathbb{C}^2$.  Compute the fusion graph for $\tilde{T}$ with respect to its defining representation.
+\end{exercise}
+\begin{proof}[Hint:]
+Since $T$ is a quotient of $\tilde{T}$ every representation of $T$ gives one of $\tilde{T}$.  You also have the defining $2$-dimensional representation.  This should be enough to calculate the fusion graph.
+\end{proof}
+
+\end{document}
