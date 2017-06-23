@@ -1,0 +1,141 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{bibentry}
+\usepackage{fullpage}
+\usepackage[T1]{fontenc}
+\usepackage[final]{microtype}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage{ifthen}
+
+\usepackage{xcolor}
+\definecolor{dark-red}{rgb}{0.7,0.25,0.25}
+\definecolor{dark-blue}{rgb}{0.15,0.15,0.55}
+\definecolor{medium-blue}{rgb}{0,0,0.65}
+\definecolor{DarkGreen}{RGB}{0,150,0}
+
+
+\usepackage[pdftex,plainpages=false,hypertexnames=false,pdfpagelabels,breaklinks]{hyperref}
+\hypersetup{
+   colorlinks, linkcolor={purple},
+   citecolor={medium-blue}, urlcolor={medium-blue}
+}
+\urlstyle{same}
+
+\usepackage[backend=biber,style=alphabetic,doi=false,isbn=false,url=false,minnames=6,maxnames=6]{biblatex}
+\setcounter{biburlnumpenalty}{9000}
+\setcounter{biburllcpenalty}{1000}
+\setcounter{biburlucpenalty}{8000}
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}
+\renewbibmacro*{volume+number+eid}{%
+  \printtext{vol.}
+  \printfield{volume}%
+  \setunit*{\addnbspace}% NEW (optional); there's also \addnbthinspace
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+\DeclareFieldFormat[article]{number}{\mkbibparens{#1}}
+\usepackage{silence}
+% Filter warnings issued by package biblatex starting with "Patching footnotes failed"
+\WarningFilter{biblatex}{Patching footnotes failed}
+\addbibresource{../../../projects/fusionatlas/bibliography/bibliography.bib}
+
+
+\newcommand{\arxiv}[1]{\href{https://arxiv.org/abs/#1}{\small  arXiv:#1}}
+\newcommand{\doi}[1]{\href{https://dx.doi.org/#1}{{\small DOI:#1}}}
+\newcommand{\euclid}[1]{\href{https://projecteuclid.org/getRecord?id=#1}{{\small  #1}}}
+\newcommand{\mathscinet}[1]{\href{https://www.ams.org/mathscinet-getitem?mr=#1}{\small  #1}}
+\newcommand{\googlebooks}[1]{(preview at \href{https://books.google.com/books?id=#1}{google books})}
+\newcommand{\notfree}{}
+\newcommand{\numdam}[1]{}
+
+\title{What comes next? \\ Suggestions for further reading}
+
+\begin{document}
+\maketitle
+
+What comes next?
+
+
+
+\begin{itemize}
+\item More on Temperley-Lieb-Jones
+  \begin{itemize}
+  \item \fullcite{MR1929335}
+  \item \fullcite{MR2274519}
+  \item \fullcite{1503.00384}
+  \item \fullcite{1502.06845}
+  \end{itemize}
+\item Category theory
+  \begin{itemize}
+  \item \fullcite{1612.09375}
+  \item \fullcite{CategoryTheoryInContext}
+  \end{itemize}
+\item Tensor categories, algebra objects, module categories
+	\begin{itemize}	
+	\item \fullcite{MR3242743}
+	\item \fullcite{MR2183279}
+	\item \fullcite{MR2677836}
+	\end{itemize}
+\item Subfactors and tensor categories
+  \begin{itemize}
+  \item \fullcite{MR1966524}
+  \item \fullcite{MR1966525}
+  \item \fullcite{MR1424954}
+  \item \fullcite{PenneysINI2017}
+  \item \fullcite{MR3308880}
+  \end{itemize}
+\item Adjectives on tensor categories
+  \begin{itemize}
+  \item \fullcite{MR1686423}
+  \item \fullcite{MR2767048}
+  \item \fullcite{1502.02882}
+  \end{itemize}
+\item Examples of planar algebras
+  \begin{itemize}
+  \item \fullcite{MR2559686}
+  \item \fullcite{MR2577673}
+  \item \fullcite{MR2679382}
+  \item \fullcite{MR2979509}
+  \item \fullcite{MR2783128}
+  \item \fullcite{MR1403861} (Warning: the arXiv version has many broken formulas)
+  \item \fullcite{MR1265145}
+  \item \fullcite{MR1950890}
+  \end{itemize}
+\item Quantum groups
+  \begin{itemize}
+  \item \fullcite{MR1321145}
+  \item \fullcite{MR1797619} (First 3 chapters)
+  \item \fullcite{MR2640343}
+  \end{itemize}
+\item The classification of finite index subfactors
+  \begin{itemize}
+  \item \fullcite{MR1317352}
+  \item \fullcite{MR3166042}
+  \item \fullcite{1509.00038}
+  \item \fullcite{MR2786219}
+  \end{itemize}
+\item Classifications of small planar algebras
+  \begin{itemize}
+   \item \fullcite{MR1733737}
+   \item \fullcite{MR1972635}{}
+   \item \fullcite{1410.2876}
+   \item \fullcite{MR3624901}
+  \end{itemize}
+\item Braided and modular categories
+  \begin{itemize}
+    \item \fullcite{MR2544735}
+    \item \fullcite{Muger-Oxford}
+  \end{itemize}
+\end{itemize}
+
+
+
+
+
+% \renewcommand*{\bibfont}{\small}
+% \setlength{\bibitemsep}{0pt}
+% \raggedright
+% \printbibliography
+\end{document}
